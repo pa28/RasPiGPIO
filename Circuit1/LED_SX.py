@@ -1,11 +1,12 @@
 import pigpio
 import time
+import signal
 
 RED = 18  # The red LED is on GPIO pin 18
 YEL = 23  # The yellow LED is on GPIO pin 23
 GRE = 24  # The green LED is on GPIO pin 24
 
-PUSH_BUTTON = 17    # The push button is on GPIO pin 17
+PUSH_BUTTON = 17  # The push button is on GPIO pin 17
 
 colours = [GRE, YEL, RED]  # All the LEDs in the order we want to work with them.
 
@@ -33,7 +34,7 @@ def set_led_state(gpio, led, state):
         gpio.write(led, state)
 
 
-# Cleanup and exit
+# Cleanup and exit, turn off all the LEDs and disconnect from the Raspberry Pi
 def clean_up_exit(gpio, exit_code):
     set_all_leds_off(gpio)
     gpio.stop()
@@ -52,3 +53,7 @@ def sleep_exit_on_button(gpio, seconds):
     time.sleep(seconds)
     if gpio.read(PUSH_BUTTON):
         clean_up_exit(gpio, 0)
+
+
+def set_keyboard_interrupt(handler):
+    signal.signal(signal.SIGINT, handler)
