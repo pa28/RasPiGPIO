@@ -4,7 +4,6 @@ import pigpio   # Pi GPIO library
 import LED_SX   # Our set-up.
 
 SLEEP = 0.2     # Length of time to sleep
-REPS = 20       # Number of times to repeat.
 
 # Connect to a Raspberry Pi on port 8888
 pi = pigpio.pi("devw.local", 8888)
@@ -15,7 +14,7 @@ if not pi.connected:
 LED_SX.configure_pins(pi)
 
 # Loop for the number of repetitions.
-for t in range(REPS):
+while True:
     for led in LED_SX.colours:                    # For each colour LED
         LED_SX.set_led_state(pi, led, 1)          # Turn the LED on
         LED_SX.sleep_exit_on_button(pi, SLEEP)    # Wait for SLEEP seconds

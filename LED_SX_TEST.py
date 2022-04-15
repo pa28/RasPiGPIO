@@ -29,4 +29,5 @@ while True:
             print("Button pushed.")
         time.sleep(SLEEP)
         LED_SX.set_led_state(pi, led, 0)
+    print("")
 
