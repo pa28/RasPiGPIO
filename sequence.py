@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 import pigpio   # Pi GPIO library
-import LED_SX   # Our set-up.
+from Circuit1 import LED_SX
 
 SLEEP = 0.2     # Length of time to sleep
 
