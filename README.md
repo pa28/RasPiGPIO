@@ -16,11 +16,11 @@ A quick test program to ensure the circuit has been set up and is working proper
 
 ## [sequence.py](https://github.com/pa28/RasPiGPIO/blob/main/Circuit1/sequence.py)
 
-Illuminate one LED at a time, in squence, until the push button is pressed.
+Illuminate one LED at a time, in sequence, until the push button is pressed.
 
 ## [flashing_lights.py](https://github.com/pa28/RasPiGPIO/blob/main/Circuit1/flashing_lights.py)
 
-Turn each LED on then off, in sequecne, until the push button is pressed.
+Turn each LED on then off, in sequence, until the push button is pressed.
 
 ## [random_lights.py](https://github.com/pa28/RasPiGPIO/blob/main/Circuit1/random_lights.py)
 
