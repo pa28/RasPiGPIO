@@ -4,7 +4,7 @@ import time
 import pigpio  # Pi GPIO library
 import LED_SX
 
-SLEEP = 10  # Length of time to sleep
+SLEEP = 1  # Length of time to sleep
 run = True
 
 # Connect to a Raspberry Pi on port 8888
@@ -41,4 +41,5 @@ while run:
             run = False
             break
         LED_SX.set_led_state(pi, led, 0)  # Turn the LED off
-    LED_SX.clean_up_exit(pi, 0)
+
+LED_SX.clean_up_exit(pi, 0)
