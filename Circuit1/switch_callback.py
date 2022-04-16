@@ -4,7 +4,8 @@ import time
 import pigpio  # Pi GPIO library
 import LED_SX
 
-SLEEP = 0.2  # Length of time to sleep
+SLEEP = 10  # Length of time to sleep
+run = True
 
 # Connect to a Raspberry Pi on port 8888
 pi = pigpio.pi("devw.local", 8888)
@@ -15,12 +16,14 @@ if not pi.connected:
 # Keyboard interrupt handler to exit the program gracefully
 def keyboard_interrupt_handler(sig, frame):
     print("Keyboard interrupt (ID: {}), cleaning up.".format(sig))
-    LED_SX.clean_up_exit(pi, 0)
+    pi.event_trigger(0)
 
 
 # Switch callback function
 def switch_callback(gpio, level, tick):
-    print("Switch callback (Pin: {}, Level: {}, Tick: {}.".format(gpio, level, tick))
+    print("Switch callback (Pin: {}, Level: {}, Time: {}).".format(gpio, level, tick))
+    if level:
+        pi.event_trigger(0)
 
 
 LED_SX.set_keyboard_interrupt(keyboard_interrupt_handler)
@@ -28,10 +31,14 @@ LED_SX.set_keyboard_interrupt(keyboard_interrupt_handler)
 # Configure the pins for output.
 LED_SX.configure_pins(pi)
 
-pi.callback(pigpio.EITHER_EDGE, switch_callback)
-while True:
+pi.set_glitch_filter(LED_SX.PUSH_BUTTON, 1000)
+pi.callback(LED_SX.PUSH_BUTTON, pigpio.RISING_EDGE, switch_callback)
+
+while run:
     for led in LED_SX.colours:  # For each colour LED
         LED_SX.set_led_state(pi, led, 1)  # Turn the LED on
-        time.sleep(SLEEP)  # Wait for SLEEP seconds
+        if pi.wait_for_event(0, SLEEP):
+            run = False
+            break
         LED_SX.set_led_state(pi, led, 0)  # Turn the LED off
-
+    LED_SX.clean_up_exit(pi, 0)
