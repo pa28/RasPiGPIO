@@ -1,10 +1,10 @@
 #!/usr/bin/env python3
 
 import pigpio  # Pi GPIO library
-import LED_SX
+import LED_SX  # Circuit configuration
 
 SLEEP = 1  # Length of time to sleep
-run = True
+run = True  # Program continues to run while true
 
 # Connect to a Raspberry Pi on port 8888
 pi = pigpio.pi("devw.local", 8888)
@@ -25,6 +25,7 @@ def switch_callback(gpio, level, tick):
         pi.event_trigger(0)
 
 
+# Set the keyboard interrupt handler
 LED_SX.set_keyboard_interrupt(keyboard_interrupt_handler)
 
 # Configure the pins for output.

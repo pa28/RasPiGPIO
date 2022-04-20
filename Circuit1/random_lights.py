@@ -5,7 +5,6 @@ import pigpio  # Pi GPIO library
 import LED_SX  # Our set-up.
 
 SLEEP = 0.15  # Length of time to sleep
-REPS = 100  # Number of times to repeat.
 
 # Connect to a Raspberry Pi on port 8888
 pi = pigpio.pi("devw.local", 8888)
