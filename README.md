@@ -25,3 +25,7 @@ Turn each LED on then off, in sequence, until the push button is pressed.
 ## [random_lights.py](https://github.com/pa28/RasPiGPIO/blob/main/Circuit1/random_lights.py)
 
 Turn LEDs on and off at random until the push button is pressed.
+
+## Pico LDC Clock Circuit
+
+![LEDs and Switch](https://github.com/pa28/RasPiGPIO/blob/main/FritzingSketches/Pico%20LCD%20Clock_bb.png)
